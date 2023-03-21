@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment # Create a deployment
+metadata:
+  name: rbmq # Set the name of the deployment
+spec:
+  replicas: 2 # Set 3 deployment replicas
+  selector:
+    matchLabels:
+      app: rbmq
+  template:
+    metadata:
+      labels:
+        app: rbmq
+    spec:
+      containers:
+        - name: rbmq
+          image: rabbitmq:3-management-alpine
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 15672 # Exposing the container port 5432 for PostgreSQL client connections.
+          envFrom:
+            - configMapRef:
+                name: rbmq-secret
+          volumeMounts:
+            - mountPath: /var/rabbitmqapp_home
+              name: rabbitmqapp-home
+      volumes:
+        - name: rabbitmqapp-home
+          emptyDir: {}
+
