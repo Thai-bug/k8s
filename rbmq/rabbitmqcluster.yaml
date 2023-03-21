@@ -1,0 +1,31 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: production-rabbitmqcluster
+spec:
+  replicas: 3
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  rabbitmq:
+          additionalConfig: |
+                  log.console.level = info
+                  channel_max = 1700
+                  default_user= guest 
+                  default_pass = guest
+                  default_user_tags.administrator = true
+  service:
+    type: NodePort
+  
+  ports:
+    - port: 5672 
+      targetPort: 5672 
+      nodePort: 30809 
+    
+    - port: 15672 
+      targetPort: 15672 
+      nodePort: 30810
