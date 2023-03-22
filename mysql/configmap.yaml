@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-secret
+  labels:
+    app: mysql
+data:
+  MYSQL_DATABASE: "dev"
+  MYSQL_USER: "thai-bug"
+  MYSQL_PASSWORD: "12022021"
+  MYSQL_ROOT_PASSWORD: "12022021root"

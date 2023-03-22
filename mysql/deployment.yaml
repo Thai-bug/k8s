@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment # Create a deployment
+metadata:
+  name: mysql # Set the name of the deployment
+spec:
+  replicas: 3 # Set 3 deployment replicas
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 3306 # Exposing the container port 5432 for mysqlQL client connections.
+          envFrom:
+          - configMapRef:
+              name: mysql-secret # Using the ConfigMap postgres-secret
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-data
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-volume-claim
+
+---
+apiVersion: v1
+kind: Service # Create service
+metadata:
+  name: mysql # Sets the service name
+  labels:
+    app: mysql # Defines app to create service for
+spec:
+  type: NodePort # Sets the service type
+  ports:
+    - port: 3306 # Sets the port to run the postgres application
+      targetPort: 3306 # Sets the port to run the postgres application
+      nodePort: 30089 # Sets the port to run the postgres application
+  selector:
+    app: mysql
