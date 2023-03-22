@@ -1,28 +1,18 @@
-apiVersion: v1
-kind: PersistentVolume # Create PV 
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
-  name: rbmq_volume # Sets PV name
+  name: production
   labels:
-    type: local # Sets PV's type
-    app: rbmq
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi # Sets PV's size
-  accessModes:
-    - ReadWriteMany
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim # Create PVC
-metadata:
-  name: rbmq_volume-claim # Sets PVC's name
-  labels:
-    app: rbmq # Defines app to create PVC for
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 3Gi
+    app: storageos
+provisioner: csi.storageos.com # CSI Driver
+parameters:
+  storageos.com/replicas: "2"
+  csi.storage.k8s.io/controller-expand-secret-name: csi-controller-expand-secret 
+  csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
+  csi.storage.k8s.io/controller-publish-secret-name: csi-controller-publish-secret
+  csi.storage.k8s.io/controller-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/fstype: ext4
+  csi.storage.k8s.io/node-publish-secret-name: csi-node-publish-secret
+  csi.storage.k8s.io/node-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/provisioner-secret-name: csi-provisioner-secret
+  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
