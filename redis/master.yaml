@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: rbmq-data
+  name: redis-master-data
   labels:
     type: local 
-    app: rbmq-data
+    app: redis-master
 spec:
   storageClassName: manual
   capacity:
@@ -12,15 +12,15 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/var/lib/rabbitmq"
+    path: "/storage/data-master0"
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim # Create PVC
 metadata:
-  name: rbmq-data-claim # Sets PVC's name
+  name: redis-master-claim # Sets PVC's name
   labels:
-    app: rbmq-data
+    app: redis-master # Defines app to create PVC for
 spec:
   storageClassName: manual
   accessModes:
