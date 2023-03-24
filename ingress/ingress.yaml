@@ -4,6 +4,7 @@ metadata:
   name: example-ingress
 
 spec:
+  ingressClassName: nginx
   rules:
     - host: thai-bug.me
       http:
