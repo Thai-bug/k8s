@@ -616,8 +616,8 @@ service:
   ## NOTE: choose port between <30000-32767>
   ##
   nodePorts:
-    http: ""
-    https: ""
+    http: "32011"
+    https: "32012"
   ## @param service.clusterIP Jenkins service Cluster IP
   ## e.g.:
   ## clusterIP: None
