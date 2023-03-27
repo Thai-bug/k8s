@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-service
+  name: auth-service
   labels:
-    app: api-service
+    app: auth-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-service
+      app: auth-service
   
   template:
     metadata:
       labels:
-        app: api-service
+        app: auth-service
     spec:
         containers:
-        - name: api-service-image
-          image: registry.digitalocean.com/dev-repositories/api-service:latest
+        - name: auth-service-image
+          image: registry.digitalocean.com/dev-repositories/auth-service:latest
           ports:
           - containerPort: 3000
           imagePullPolicy: Always

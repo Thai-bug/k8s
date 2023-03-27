@@ -1,25 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-service
+  name: user-service
   labels:
-    app: api-service
+    app: user-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-service
+      app: user-service
   
   template:
     metadata:
       labels:
-        app: api-service
+        app: user-service
     spec:
         containers:
-        - name: api-service-image
-          image: registry.digitalocean.com/dev-repositories/api-service:latest
-          ports:
-          - containerPort: 3000
+        - name: api-test-image
+          image: registry.digitalocean.com/dev-repositories/user-service:latest
           imagePullPolicy: Always
         imagePullSecrets:
         - name: dev-repositories
