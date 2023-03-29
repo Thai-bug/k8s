@@ -16,7 +16,7 @@ spec:
           path: "/"
           backend:
             service:
-              name: api
+              name: api-service 
               port:
                 number: 3000
   tls:
