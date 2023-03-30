@@ -12,7 +12,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/var/lib/postgresql/data"
+    path: "/var/lib/postgresql"
 
 ---
 apiVersion: v1

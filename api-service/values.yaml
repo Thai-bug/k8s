@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 1
 
 image: 
   repository: registry.digitalocean.com/dev-repositories/api-service
