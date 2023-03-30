@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: letsencrypt-nginx
+  name: thai-bug-letsencrypt
 spec:
   acme:
     email: hxt12021999@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-nginx-private-key
+      name: thai-bug-letsencrypt-private-key
     solvers:
       # Use the HTTP-01 challenge provider
       - http01:
@@ -17,9 +17,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress
+  name: thai-bug
   annotations:
-    cert-manager.io/issuer: letsencrypt-nginx
+    cert-manager.io/issuer: thai-bug-letsencrypt
 
 spec:
   ingressClassName: nginx
@@ -39,4 +39,4 @@ spec:
   tls:
   - hosts:
     - thai-bug.me
-    secretName: letsencrypt-nginx
+    secretName: thai-bug-letsencrypt
