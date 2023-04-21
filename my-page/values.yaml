@@ -7,8 +7,9 @@ image:
     - name: dev-repositories
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 3000
+  targetPort: 3000
   protocol: TCP
   name: my-page
 
