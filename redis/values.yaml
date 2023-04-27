@@ -101,7 +101,7 @@ image:
   ##
   debug: false
 
-## @section Redis&reg; common configuration parameters
+## @section Redis&reg; common configuraredis-master-datation parameters
 ## https://github.com/bitnami/containers/tree/main/bitnami/redis#configuration
 ##
 
