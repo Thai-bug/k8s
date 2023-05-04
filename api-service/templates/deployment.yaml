@@ -30,7 +30,7 @@ spec:
       volumes:
         - name: data-volume
           persistentVolumeClaim:
-            claimName: api-service-volume-claim
+            claimName: api-service-volume-claim-v2
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

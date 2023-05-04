@@ -1,57 +1,29 @@
-
-# kind: PersistentVolume # Create PV 
-# metadata:
-#   name: api-service-volume # Sets PV name
-#   labels:
-#     app: postgres
-#     type: local # Sets PV's type
-# spec:
-#   storageClassName: standard
-#   capacity:
-#     storage: 10Gi # Sets PV's size
-#   accessModes:
-#     - ReadWriteMany
-#   hostPath:
-#     path: "/home/app"
-
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: api-service-volume
-spec: 
-  capacity: 
-    storage: 2Gi 
-  volumeMode: Filesystem
+  name: api-service-volume-v2
+  labels:
+    type: local
+spec:
   storageClassName: manual
+  capacity:
+    storage: 5Gi
   accessModes:
     - ReadWriteMany
-  hostPath:
-    path: /tntt-server
+  nfs:
+    server: ""
+    path: "/storage/tntt"
 
 ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim # Create PVC
-# metadata:
-#   name: api-service-volume-claim # Sets PVC's name
-#   labels:
-#     app: postgres # Defines app to create PVC for
-# spec:
-#   storageClassName: standard
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 10Gi
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: api-service-volume-claim
-spec: 
-  volumeName: api-service-volume
-  accessModes: 
-    - ReadWriteMany
+  name: api-service-volume-claim-v2
+spec:
   storageClassName: manual
-  resources: 
-    requests: 
-      storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
